@@ -90,26 +90,41 @@ var nextquestion = () => {
 
 var marks = 0;
 window.check = () => {
-  var select = document.querySelector("input[type=radio]:checked");
-  // console.log(select);
-  if (!select) {
-    alert("Please Select Any one Option");
-  } else {
-    // console.log(select.value);
-    // console.log(questions[index].correctAnswer);
-    if (questions[index].correctAnswer == select.value) {
-      marks++;
-    } else {
-      marks;
-    }
-    // console.log(marks);
-    // console.log(index);
-    if (index == 5) {
-      showresult();
-    } else {
-      nextquestion();
-    }
-  }
+  const dbf = ref(db);
+  get(child(dbf, "questions/"))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        // console.log(snapshot.val());
+        var data = Object.values(snapshot.val());
+        var q = data[index];
+        var select = document.querySelector("input[type=radio]:checked");
+        // console.log(select);
+        // console.log(q);
+        if (!select) {
+          alert("Please Select Any one Option");
+        } else {
+          // console.log(select.value);
+          // console.log(questions[index].correctAnswer);
+          if (q.correctAnswer == select.value) {
+            marks++;
+          } else {
+            marks;
+          }
+          // console.log(marks);
+          // console.log(index);
+          if (index == 5) {
+            showresult();
+          } else {
+            nextquestion();
+          }
+        }
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 window.showresult = () => {
   options.innerHTML = " ";
