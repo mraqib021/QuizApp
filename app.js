@@ -1,36 +1,3 @@
-var questions = [
-  {
-    question: "HTML Stands for ______________",
-    options: ["HTML", "HTML", "Hypertext Markup Language", "HTML"],
-    correctAnswer: "Hypertext Markup Language",
-  },
-  {
-    question: "CSS Stands for ______________",
-    options: ["CSS", "CSS", "Cascading Style Sheet", "CSS"],
-    correctAnswer: "Cascading Style Sheet",
-  },
-  {
-    question: "JS Stands for ______________",
-    options: ["JS", "JS", "JavaScript", "JS"],
-    correctAnswer: "JavaScript",
-  },
-  {
-    question: "RAM Stands for ______________",
-    options: ["RAM", "RAM", "Random Access Memory", "RAM"],
-    correctAnswer: "Random Access Memory",
-  },
-  {
-    question: "SQL Stands for ______________",
-    options: ["SQL", "SQL", "Structured Query Language", "SQL"],
-    correctAnswer: "Structured Query Language",
-  },
-  {
-    question: "is HTML is Programming Language?",
-    options: ["YES", "NO"],
-    correctAnswer: "NO",
-  },
-];
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import {
@@ -60,7 +27,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 const db = getDatabase(app);
 
 // console.log(db);
@@ -103,9 +70,7 @@ var rnderquestion = () => {
         currentQ.innerHTML = index + 1;
         totalQ.innerHTML = data.length;
         for (var i = 0; i < q.options.length; i++) {
-          options.innerHTML += `<div class="col-12 col-md-6 p-1"><label for="option${i}" class="input-boxs p-2 rounded-pill custom_color " style="width: 100%;"><input type="radio" name="question" id="option${i}" value='${q.options[i]}'> </label></div>`;
-          var option1 = document.getElementById(`option${i}`);
-          console.log(option1);
+          options.innerHTML += `<div class="col-12 col-md-6 p-1"><label for="option${i}" class="input-boxs p-2 rounded-pill custom_color " style="width: 100%;"><input type="radio" name="question" id="option${i}" value='${q.options[i]}'> ${q.options[i]} </label></div>`;
         }
       } else {
         console.log("No data available");
